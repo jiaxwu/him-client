@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Client from '../sdk/client';
+import { useStore } from 'vuex'
 
-const client = new Client('ws://localhost:8080/msg', 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e')
+const store = useStore()
+const client = Client.newClient(store.state.wsURL, store.state.token)
 client.start()
 
 const sendMsg = () => {

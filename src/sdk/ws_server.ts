@@ -27,6 +27,7 @@ export default class WSServer {
         this.eventHandler = eventHandler
     }
 
+    // 创建WSServer
     public static newWSServer(wsURL: string, token: string, eventHandler: (event: string) => void) {
         if (this.wsServer === undefined) {
             this.wsServer = new WSServer(wsURL, token, eventHandler)
