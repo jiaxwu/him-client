@@ -16,8 +16,8 @@ export default class WSServer {
     private heartbeatTimeInterval: number = 50 * 1000
     // 上次重连时间
     private lastConnectTime: number = 0
-    // 重连间隔
-    private reconnectTimeInterval: number = 5 * 1000
+    // 最小重连间隔
+    private minReconnectTimeInterval: number = 5 * 1000
     // 事件处理器
     private eventHandler: (event: string) => void
 
@@ -103,12 +103,13 @@ export default class WSServer {
     // 处理重连
     private handleReconnect() {
         const now = moment().valueOf()
+        let delay = Math.max(this.minReconnectTimeInterval - (now - this.lastConnectTime), 0)
         setTimeout(() => {
             if (this.isOpen() || this.isConnecting()) {
                 return
             }
             this.connect()
-        }, Math.max(now - this.lastConnectTime, this.reconnectTimeInterval))
+        }, delay)
     }
 
     // 处理心跳
