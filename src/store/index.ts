@@ -1,9 +1,14 @@
 import { createStore } from 'vuex'
 
 class DefaultState {
-    count: number = 0
-    token: string = 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e'
+    // 基本HttpURL
+    baseHttpURL: string = 'http://localhost:8080'
+    // WSURL
     wsURL: string = 'ws://localhost:8080/msg'
+    // 凭证
+    token: string = 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e'
+
+    count: number = 0
 }
 
 export default createStore<DefaultState>({
