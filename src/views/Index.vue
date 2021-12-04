@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Client from '../sdk/client';
 import { useStore } from 'vuex'
+import { getFriendInfos } from '@/api/friend';
 
 const store = useStore()
 const client = Client.newClient(store.state.wsURL, store.state.token)
@@ -19,6 +20,15 @@ const sendMsg = () => {
         }
     })
 }
+
+
+getFriendInfos({
+    isFriend: true
+}).then(res=>{
+    console.log(res)
+}).catch(res=>{
+    console.log(res)
+})
 
 </script>
 
