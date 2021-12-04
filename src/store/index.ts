@@ -6,7 +6,7 @@ class DefaultState {
     // WSURL
     wsURL: string = 'ws://localhost:8080/msg'
     // 凭证
-    token: string = ''
+    token: string = 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e'
 
     count: number = 0
 }

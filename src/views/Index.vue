@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import Client from '@/sdk/client';
 import { useStore } from 'vuex'
+import { createAddFriendApplication } from '@/api/friend';
+import Client from '@/msg/client';
 
 const store = useStore()
 
@@ -26,6 +27,12 @@ const setToken = () => {
         store.commit('setToken', '')
     }
 }
+
+createAddFriendApplication(2, '你好，我是xhsf').then(res => {
+    console.log(res)
+}).catch(res => {
+    console.log(res)
+})
 
 </script>
 
