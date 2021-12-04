@@ -7,7 +7,6 @@ import WSServer from "./ws_server";
 export default class Client {
     // 单例模式
     private static client: Client
-
     // WSServer
     private wsServer: WSServer
     // 是否已经启动
