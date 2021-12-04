@@ -1,13 +1,10 @@
 import moment from 'moment'
+import store from '@/store'
 
 // 处理网络长连接
 export default class WSServer {
     // 单例模式
     private static wsServer: WSServer
-    // ws入口地址
-    private wsURL: string
-    // token 
-    private token: string
     // WebSocket
     private ws!: WebSocket
     // 是否已经调用run()
@@ -21,29 +18,17 @@ export default class WSServer {
     // 事件处理器
     private eventHandler: (event: string) => void
 
-    private constructor(wsURL: string, token: string, eventHandler: (event: string) => void) {
-        this.wsURL = wsURL
-        this.token = token
+    private constructor(eventHandler: (event: string) => void) {
         this.eventHandler = eventHandler
     }
 
     // 创建WSServer
-    public static newWSServer(wsURL: string, token: string, eventHandler: (event: string) => void) {
+    public static newWSServer(eventHandler: (event: string) => void) {
         if (this.wsServer === undefined) {
-            this.wsServer = new WSServer(wsURL, token, eventHandler)
+            this.wsServer = new WSServer(eventHandler)
+            this.wsServer.run()
         }
         return this.wsServer
-    }
-
-    // 开始连接
-    public run() {
-        // 如果已经启动
-        if (this.isRun) {
-            throw new Error("WSServer is running")
-        }
-        this.isRun = true
-        this.connect()
-        this.handleHeartbeat()
     }
 
     // 发送消息
@@ -73,17 +58,32 @@ export default class WSServer {
         return false
     }
 
+    // 开始连接
+    private run() {
+        // 如果已经启动
+        if (this.isRun) {
+            throw new Error("WSServer is running")
+        }
+        this.isRun = true
+        this.connect()
+        this.handleHeartbeat()
+    }
+
     // 连接
     private connect() {
         // 如果已经打开或正在打开则抛出异常
         if (this.isConnecting() || this.isOpen()) {
-            throw new Error("WsServer has been open or openning")
+            return
         }
 
         // 建立新的WebSocket
         this.lastConnectTime = moment().valueOf()
         new Promise((resolve, reject) => {
-            this.ws = new WebSocket(`${this.wsURL}?Token=${this.token}`)
+            if (store.state.token == '') {
+                reject("token is empty")
+                return
+            }
+            this.ws = new WebSocket(`${store.state.wsURL}?Token=${store.state.token}`)
             this.ws.onopen = () => {
                 console.log("websocket open " + moment().toLocaleString())
             }
@@ -92,9 +92,11 @@ export default class WSServer {
             }
             this.ws.onclose = (e) => {
                 reject("websocket close " + e)
+                return
             }
             this.ws.onerror = (e) => {
                 reject("websocket error " + e)
+                return
             }
         }).catch(e => {
             this.handleReconnect()
@@ -120,9 +122,7 @@ export default class WSServer {
                 if (this.isOpen()) {
                     this.ping()
                 }
-            } catch (e) {
-                console.error("ping error " + e)
-            }
+            } catch (e) { }
         }, this.heartbeatTimeInterval)
     }
 

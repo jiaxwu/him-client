@@ -12,25 +12,17 @@ export default class Client {
     // 是否已经启动
     private isStart: boolean = false
 
-    private constructor(wsURL: string, token: string) {
-        this.wsServer = WSServer.newWSServer(wsURL, token, this.eventHandler)
+    private constructor() {
+        this.wsServer = WSServer.newWSServer(this.eventHandler)
     }
 
     // 创建Client
-    public static newClient(wsURL: string, token: string) {
+    public static newClient() {
         if (this.client === undefined) {
-            this.client = new Client(wsURL, token)
+            this.client = new Client()
+            this.client.start()
         }
         return this.client
-    }
-
-    // 启动客户端（自能start一次）
-    public start() {
-        if (this.isStart) {
-            return
-        }
-        this.isStart = true
-        this.wsServer.run()
     }
 
     // 发送消息
@@ -40,6 +32,14 @@ export default class Client {
         if (this.wsServer.isOpen()) {
             this.wsServer.sendMsg(JSON.stringify(sendMsgReq))
         }
+    }
+
+    // 启动客户端（自能start一次）
+    private start() {
+        if (this.isStart) {
+            return
+        }
+        this.isStart = true
     }
 
     // 事件处理器

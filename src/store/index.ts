@@ -6,7 +6,7 @@ class DefaultState {
     // WSURL
     wsURL: string = 'ws://localhost:8080/msg'
     // 凭证
-    token: string = 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e'
+    token: string = ''
 
     count: number = 0
 }
@@ -18,6 +18,9 @@ export default createStore<DefaultState>({
     mutations: {
         increment(state: DefaultState) {
             state.count++
+        },
+        setToken(state: DefaultState, token: string) {
+            state.token = token
         }
     },
     actions: {
