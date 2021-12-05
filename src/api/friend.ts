@@ -33,6 +33,16 @@ export const updateFriendInfo = (FriendID: number, Action: {
 }
 
 /**
+ * 删除好友
+ * @param FriendID // 好友编号
+ */
+export const deleteFriend = (FriendID: number) => {
+  return axios.post('/friend/delete', {
+    FriendID: FriendID,
+  })
+}
+
+/**
  * 获取添加好友申请
  * @param LastAddFriendApplicationId 最后一个添加好友请求的编号（因为是反过来排序的）
  * @param Size 多少条

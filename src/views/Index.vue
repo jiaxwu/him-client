@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useStore } from 'vuex'
-import { getFriendInfos, createAddFriendApplication, updateFriendInfo, getAddFriendApplications, updateAddFriendApplication } from '@/api/friend';
+import { getFriendInfos, createAddFriendApplication, updateFriendInfo, getAddFriendApplications, updateAddFriendApplication, deleteFriend } from '@/api/friend';
 import Client from '@/msg/client';
 
 const store = useStore()
@@ -27,6 +27,12 @@ const setToken = () => {
         store.commit('setToken', '')
     }
 }
+
+// deleteFriend(2).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
 
 // updateAddFriendApplication(8, {
 //     Accept: true
