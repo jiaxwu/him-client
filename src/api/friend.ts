@@ -33,6 +33,18 @@ export const updateFriendInfo = (FriendID: number, Action: {
 }
 
 /**
+ * 获取添加好友申请
+ * @param LastAddFriendApplicationId 最后一个添加好友请求的编号（因为是反过来排序的）
+ * @param Size 多少条
+ */
+export const getAddFriendApplications = (LastAddFriendApplicationId: number, Size: number) => {
+  return axios.post('/friend/add-friend-applications/get', {
+    LastAddFriendApplicationId: LastAddFriendApplicationId,
+    Size: Size
+  })
+}
+
+/**
  * 创建添加好友申请
  * @param FriendID 好友编号
  * @param ApplicationMsg 申请消息
@@ -44,3 +56,19 @@ export const createAddFriendApplication = (FriendID: number, ApplicationMsg: str
   })
 }
 
+/**
+ * 更新添加好友申请
+ * @param AddFriendApplicationID 添加好友申请编号
+ * @param Action 更新添加好友申请请求的行为
+ */
+export const updateAddFriendApplication = (AddFriendApplicationID: number, Action: {
+  ApplicationMsg?: string // 申请消息
+  FriendReply?: string // 好友回复
+  Accept?: boolean // 接受
+  Reject?: boolean // 拒绝
+}) => {
+  return axios.post('/friend/add-friend-application/update', {
+    AddFriendApplicationID: AddFriendApplicationID,
+    Action: Action
+  })
+}
