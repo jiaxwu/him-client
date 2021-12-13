@@ -12,6 +12,7 @@ export default defineConfig({
     }
   },
   server: {
-    cors: true
+    cors: true,
+    port: 80
   },
 })

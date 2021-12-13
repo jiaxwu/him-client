@@ -11,11 +11,11 @@ const sendMsg = () => {
     client.sendMsg({
         Receiver: {
             Type: "User",
-            ReceiverID: 2
+            ReceiverID: 12
         },
         Content: {
             TextMsg: {
-                Content: "测试测试哈哈哈"
+                Content: "啦啦啦啦"
             }
         }
     })
@@ -23,19 +23,19 @@ const sendMsg = () => {
 
 const setToken = () => {
     if (store.state.token === '') {
-        store.commit('setToken', 'c61e1dd2-ebc3-4ed1-9cd7-335e7fac201e')
+        store.commit('setToken', 'cfdfcb83-5ed1-4864-81bc-39bd9c28f532')
     } else {
         store.commit('setToken', '')
     }
 }
 
-getGroupInfos({
-    All: true
-}).then(res => {
-    console.log(res)
-}).catch(res => {
-    console.log(res)
-})
+// getGroupInfos({
+//     All: true
+// }).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
 
 // createGroup("哈哈哈这是一个群", "", [2]).then(res => {
 //     console.log(res)
