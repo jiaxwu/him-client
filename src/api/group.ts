@@ -26,3 +26,19 @@ export const createGroup = (Name: string, Icon: string, MemberIDS: number[]) => 
     MemberIDS: MemberIDS
   })
 }
+
+/**
+ * 更新群信息
+ * @param GroupID 群编号
+ * @param Action 更新行为
+ */
+ export const updateGroupInfo = (GroupID: number, Action: {
+  Name?:   string, // 群名
+	Icon?:   string, // 图标
+	Notice?: string, // 群公告
+ }) => {
+  return axios.post('/group/info/update', {
+    GroupID: GroupID,
+    Action: Action,
+  })
+}

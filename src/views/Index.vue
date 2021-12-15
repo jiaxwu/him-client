@@ -2,7 +2,7 @@
 import { useStore } from 'vuex'
 import { getFriendInfos, createAddFriendApplication, updateFriendInfo, getAddFriendApplications, updateAddFriendApplication, deleteFriend } from '@/api/friend';
 import Client from '@/msg/client';
-import { createGroup, getGroupInfos } from '@/api/group';
+import { createGroup, getGroupInfos, updateGroupInfo } from '@/api/group';
 
 const store = useStore()
 
@@ -29,6 +29,14 @@ const setToken = () => {
     }
 }
 
+// updateGroupInfo(1, {
+//     Notice: "这是一条群公告哈哈哈",
+// }).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
 // getGroupInfos({
 //     All: true
 // }).then(res => {
@@ -37,7 +45,7 @@ const setToken = () => {
 //     console.log(res)
 // })
 
-// createGroup("哈哈哈这是一个群", "", [2]).then(res => {
+// createGroup("哈哈哈这是一个群", "", [1]).then(res => {
 //     console.log(res)
 // }).catch(res => {
 //     console.log(res)

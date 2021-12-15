@@ -2,11 +2,11 @@ import { createStore } from 'vuex'
 
 class DefaultState {
     // 基本HttpURL
-    baseHttpURL: string = 'http://118.31.38.89:3000'
+    baseHttpURL: string = 'http://localhost:8080'
     // WSURL
-    wsURL: string = 'ws://118.31.38.89:3000/v1/msg/ws'
+    wsURL: string = 'ws://localhost:8080/msg'
     // 凭证
-    token: string = '1e1b2579-b945-4b49-bb1c-0dae09927057'
+    token: string = 'c81405d8-dcb9-4dc1-a77c-e16cd302d20e'
 
     count: number = 0
 }
