@@ -2,7 +2,7 @@
 import { useStore } from 'vuex'
 import { getFriendInfos, createAddFriendApplication, updateFriendInfo, getAddFriendApplications, updateAddFriendApplication, deleteFriend } from '@/api/friend';
 import Client from '@/msg/client';
-import { createGroup, getGroupInfos, updateGroupInfo } from '@/api/group';
+import { changeGroupMemberInfo, createGroup, genGroupQRCode, getGroupInfo, getGroupInfos, getGroupMemberInfos, getUserGroupInfos, scanCodeJoinGroup, updateGroupInfo } from '@/api/group';
 
 const store = useStore()
 
@@ -28,6 +28,46 @@ const setToken = () => {
         store.commit('setToken', '')
     }
 }
+
+getGroupInfo(1).then(res => {
+    console.log(res)
+}).catch(res => {
+    console.log(res)
+})
+
+// getUserGroupInfos(1, 30).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// scanCodeJoinGroup('i5Peiy2UUAWR+2nhhpDWLasWK8BizH6QoO81SH2DzM0lonCimlAsjfmIkh7reqq/OvqDzCWMfsvaY2Ki3Tpp+P4rKftoVeLcAJHc9KtdmPVisj/K1sGJD2HGHBW7nmxyCwD/6q+w/RurRV9U+tPmq0fuA1QnlaUv65utFDdUdwl0tmJV3cApHX0GhWTo4U76XOwge+Mz3IEN+2fMMDkjpAr5lNrrQ/AzfwergUggDnxFvpy4IZFG8F1PSKw17w5i1Zna5De7xt5nQw5Rs1k4ys+mxjiLzv3uc4A926m5shFEJ8uwtsreOQcTzGirm5IMlAlkRezqDOr+Ibk28Xhhyg==').then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// genGroupQRCode(1).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// changeGroupMemberInfo(1, {
+//     GroupNickName: "jiaxwu",
+// }).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// getGroupMemberInfos(1, {
+//     MemberID: 1,
+// }).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
 
 // updateGroupInfo(1, {
 //     Notice: "这是一条群公告哈哈哈",

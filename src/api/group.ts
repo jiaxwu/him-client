@@ -2,14 +2,23 @@ import axios from "./axios"
 
 /**
  * 获取群信息
- * @param Condition 选1
+ * @param GroupID 群编号
  */
-export const getGroupInfos = (Condition: {
-  GroupID?: number // 群编号
-  All?: boolean // 全部
-}) => {
-  return axios.post('/group/infos/get', {
-    Condition: Condition
+export const getGroupInfo = (GroupID: number) => {
+  return axios.post('/group/info/get', {
+    GroupID: GroupID,
+  })
+}
+
+/**
+ * 获取用户群信息
+ * @param Page 页码
+ * @param Size 页大小
+ */
+export const getUserGroupInfos = (Page: number, Size: number) => {
+  return axios.post('/user/group/infos/get', {
+    Page: Page,
+    Size: Size
   })
 }
 
@@ -32,13 +41,65 @@ export const createGroup = (Name: string, Icon: string, MemberIDS: number[]) => 
  * @param GroupID 群编号
  * @param Action 更新行为
  */
- export const updateGroupInfo = (GroupID: number, Action: {
-  Name?:   string, // 群名
-	Icon?:   string, // 图标
-	Notice?: string, // 群公告
- }) => {
+export const updateGroupInfo = (GroupID: number, Action: {
+  Name?: string, // 群名
+  Icon?: string, // 图标
+  Notice?: string, // 群公告
+}) => {
   return axios.post('/group/info/update', {
     GroupID: GroupID,
     Action: Action,
+  })
+}
+
+/**
+ * 获取群成员信息
+ * @param GroupID 群编号
+ * @param Condition 条件
+ */
+export const getGroupMemberInfos = (GroupID: number, Condition: {
+  All?: boolean, // 全部
+  MemberID?: number // 成员编号
+}) => {
+  return axios.post('/group/member/infos/get', {
+    GroupID: GroupID,
+    Condition: Condition,
+  })
+}
+
+/**
+ * 修改群成员信息
+ * @param GroupID 群编号
+ * @param Action 行为
+ */
+export const changeGroupMemberInfo = (GroupID: number, Action: {
+  GroupNickName?: string, // 群昵称
+  IsDisturb?: boolean, // 是否免打扰
+  IsTop?: boolean, // 是否置顶
+  IsShowNickName?: boolean, // 是显示群成员昵称
+}) => {
+  return axios.post('/group/member/info/change', {
+    GroupID: GroupID,
+    Action: Action,
+  })
+}
+
+/**
+ * 生成群二维码
+ * @param GroupID 群编号
+ */
+export const genGroupQRCode = (GroupID: number) => {
+  return axios.post('/group/qrcode/gen', {
+    GroupID: GroupID,
+  })
+}
+
+/**
+ * 扫码入群
+ * @param QRCode 群二维码
+ */
+export const scanCodeJoinGroup = (QRCode: string) => {
+  return axios.post('/group/join/code/scan', {
+    QRCode: QRCode,
   })
 }
