@@ -2,7 +2,7 @@
 import { useStore } from 'vuex'
 import { getFriendInfos, createAddFriendApplication, updateFriendInfo, getAddFriendApplications, updateAddFriendApplication, deleteFriend } from '@/api/friend';
 import Client from '@/msg/client';
-import { changeGroupMemberInfo, createGroup, genGroupQRCode, getGroupInfo, getGroupInfos, getGroupMemberInfos, getUserGroupInfos, scanCodeJoinGroup, updateGroupInfo } from '@/api/group';
+import { changeGroupMemberInfo, confirmJoinGroupInvite, createGroup, genGroupQRCode, getGroupInfo, getGroupInfos, getGroupMemberInfos, getJoinGroupInvite, getUserGroupInfos, inviteJoinGroup, scanCodeJoinGroup, updateGroupInfo } from '@/api/group';
 
 const store = useStore()
 
@@ -29,11 +29,29 @@ const setToken = () => {
     }
 }
 
-getGroupInfo(1).then(res => {
-    console.log(res)
-}).catch(res => {
-    console.log(res)
-})
+// confirmJoinGroupInvite(2).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// inviteJoinGroup(1, [5], "").then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// getJoinGroupInvite(1).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
+
+// getGroupInfo(1).then(res => {
+//     console.log(res)
+// }).catch(res => {
+//     console.log(res)
+// })
 
 // getUserGroupInfos(1, 30).then(res => {
 //     console.log(res)
@@ -70,7 +88,7 @@ getGroupInfo(1).then(res => {
 // })
 
 // updateGroupInfo(1, {
-//     Notice: "这是一条群公告哈哈哈",
+//     IsInviteJoinGroupNeedConfirm: true,
 // }).then(res => {
 //     console.log(res)
 // }).catch(res => {

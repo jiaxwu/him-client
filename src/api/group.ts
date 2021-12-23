@@ -45,6 +45,7 @@ export const updateGroupInfo = (GroupID: number, Action: {
   Name?: string, // 群名
   Icon?: string, // 图标
   Notice?: string, // 群公告
+  IsInviteJoinGroupNeedConfirm?: boolean, // 是否邀请入群需要管理员或群主确认（默认不需要确认直接入群）
 }) => {
   return axios.post('/group/info/update', {
     GroupID: GroupID,
@@ -101,5 +102,39 @@ export const genGroupQRCode = (GroupID: number) => {
 export const scanCodeJoinGroup = (QRCode: string) => {
   return axios.post('/group/join/code/scan', {
     QRCode: QRCode,
+  })
+}
+
+/**
+ * 邀请入群
+ * @param GroupID 群编号
+ * @param InviteeIDS 被邀请人编号列表
+ * @param Reason 邀请理由
+ */
+export const inviteJoinGroup = (GroupID: number, InviteeIDS: number[], Reason: string) => {
+  return axios.post('/group/join/invite', {
+    GroupID: GroupID,
+    InviteeIDS: InviteeIDS,
+    Reason: Reason,
+  })
+}
+
+/**
+ * 获取入群邀请
+ * @param JoinGroupInviteID 入群邀请编号
+ */
+export const getJoinGroupInvite = (JoinGroupInviteID: number) => {
+  return axios.post('/group/join/invite/get', {
+    JoinGroupInviteID: JoinGroupInviteID,
+  })
+}
+
+/**
+ * 确认入群邀请
+ * @param JoinGroupInviteID 入群邀请编号
+ */
+export const confirmJoinGroupInvite = (JoinGroupInviteID: number) => {
+  return axios.post('/group/join/invite/confirm', {
+    JoinGroupInviteID: JoinGroupInviteID,
   })
 }
